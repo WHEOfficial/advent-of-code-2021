@@ -9,7 +9,7 @@ with open("input.txt", 'r') as infile:
         key, value = i.split(' -> ')
         insertion_map[key] = value
     
-    steps = 40
+    steps = 10
     for _ in range(steps):
         new_polymer = ''
         for c in range(len(polymer) - 1):
