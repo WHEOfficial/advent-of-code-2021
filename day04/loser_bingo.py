@@ -30,6 +30,7 @@ with open("input.txt", 'r') as infile:
     boards = []
     current_num = 0
     board_sum = 0
+    winning_boards = []
 
     while infile.readline() != "":
         board = []
@@ -47,16 +48,29 @@ with open("input.txt", 'r') as infile:
     for num in nums:
         current_num = num
         drawn_nums.append(num)
-        for board in boards:
+        for i, board in enumerate(boards):
             result = check_board(board, drawn_nums)
             if result:
-                break
+                winning_boards.append(result)
+                del boards[i]
+        if len(boards) == 0:
+            break
+    
+    loser = winning_boards.pop()
+
+    drawn_nums = []
+    current_num = 0
+    for num in nums:
+        current_num = num
+        drawn_nums.append(num)
+        result = check_board(loser, drawn_nums)
         if result:
             break
-
+    
     for row in result:
         for col in row:
             if col not in drawn_nums:
                 board_sum += col
+
     
 print(board_sum * current_num)
