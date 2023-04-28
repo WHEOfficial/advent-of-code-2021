@@ -27,8 +27,11 @@ with open("input.txt", 'r') as infile:
     dumbos = infile.read().splitlines()
     simulation_length = 100
     flashes = 0
+    step = 0
 
-    for step in range(simulation_length):
+    while flashes < 100:
+        flashes = 0
+        step += 1
         for i, row in enumerate(dumbos):
             col_list = []
             for col in row:
@@ -52,6 +55,5 @@ with open("input.txt", 'r') as infile:
                 if col < 0:
                     flashes += 1
                     dumbos[y][x] = 0
-        
-        print(f"STEP {step + 1}: {flashes} flashes")
-        display_dumbos(dumbos)
+    
+    print(step)
